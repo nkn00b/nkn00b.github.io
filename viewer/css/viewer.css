@@ -1,0 +1,38 @@
+body {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+}
+
+.jacket {
+    padding: 4px;
+    margin: -1px;
+    background: #000;
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+}
+
+.box-wrapper {
+    display: -webkit-flexbox;
+    display: -moz-flexbox;
+    display: -ms-flexbox;
+    display: -o-flexbox;
+    display: flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    border: solid 1px #CCC;
+}
+
+.grade {
+    border-top: solid 1px #CCC;
+}
+
+.score {
+    border-top: solid 1px #CCC;
+}

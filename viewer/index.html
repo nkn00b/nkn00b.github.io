@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+  <title>SDVX Score tool viewer</title>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+  <script src="../js/knockout-3.2.0.js"></script>
+  <script src="js/model.js"></script>
+  <script src="js/viewer.js"></script>
+  <link rel="stylesheet" href="css/viewer.css">
+
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="./">SDVX Score tool viewer</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="changelog.html">changelog</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="ユーザー名" data-bind="value: username">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" data-bind="click: loadUserdata">表示</button>
+            </span>
+          </div>
+          <div class="input-group">
+            <p class="control-label">
+              <div class="form-inline">
+                <label class="checkbox-inline"><input type="checkbox" data-bind="checked: showGrade">Grade</input></label>
+                <label class="checkbox-inline"><input type="checkbox" data-bind="checked: showScore">Score</input></label>
+                <label class="checkbox-inline"><input type="checkbox" data-bind="checked: showMark">Mark</input></label>
+              </div>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tab1" data-toggle="tab">14 クリア</a></li>
+      <li><a href="#tab2" data-toggle="tab">14 AAA</a></li>
+      <li><a href="#tab3" data-toggle="tab">14 990</a></li>
+      <li><a href="#tab4" data-toggle="tab">15/16 クリア</a></li>
+      <li><a href="#tab5" data-toggle="tab">15/16 AAA</a></li>
+      <li><a href="#tab6" data-toggle="tab">15/16 990</a></li>
+    </ul>
+
+    <div id="clearlist" style="background: #fff; padding: 0px">
+
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab1">
+          <!-- ko foreach: filter14_Clear.ranks -->
+          <div style="margin: 10px 0px;">
+            <div style="float: left;">
+              <h3 data-bind="text: title"></h3>
+            </div>
+            <div style="margin-left: 50px;">
+              <div class="box-wrapper">
+                <!-- ko foreach: filter(tracks) -->
+                <div class="box">
+                  <div class="jacket" data-bind="attr: {title: tips}, style: {background: clearmark, 'background-image': jacket, 'background-position':sprite_position, opacity:((is_clear()&amp;&amp;$root.showMark())?0.2:1)}" witdh="56px" height="56px"></div>
+                  <div class="grade" data-bind="visible: $root.showGrade">
+                    <p class="text-center" style="margin: 0px" data-bind="text: grade"></p>
+                  </div>
+                  <div class="score" data-bind="visible: $root.showScore">
+                    <p class="text-center" style="margin: 0px" data-bind="text: score"></p>
+                  </div>
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+          <!-- /ko -->
+        </div>
+
+        <div class="tab-pane fade" id="tab2">
+          <!-- ko foreach: filter14_AAA.ranks -->
+          <div style="margin: 10px 0px;">
+            <div style="float: left;">
+              <h3 data-bind="text: title"></h3>
+            </div>
+            <div style="margin-left: 50px;">
+              <div class="box-wrapper">
+                <!-- ko foreach: filter(tracks) -->
+                <div class="box">
+                  <div class="jacket" data-bind="attr: {title: tips}, style: {background: clearmark, 'background-image': jacket, 'background-position':sprite_position, opacity:((is_aaa()&amp;&amp;$root.showMark())?0.2:1)}" witdh="56px" height="56px"></div>
+                  <div class="grade" data-bind="visible: $root.showGrade">
+                    <p class="text-center" style="margin: 0px" data-bind="text: grade"></p>
+                  </div>
+                  <div class="score" data-bind="visible: $root.showScore">
+                    <p class="text-center" style="margin: 0px" data-bind="text: score"></p>
+                  </div>
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+          <!-- /ko -->
+        </div>
+
+        <div class="tab-pane fade" id="tab3">
+          <!-- ko foreach: filter14_99.ranks -->
+          <div style="margin: 10px 0px;">
+            <div style="float: left;">
+              <h3 data-bind="text: title"></h3>
+            </div>
+            <div style="margin-left: 50px;">
+              <div class="box-wrapper">
+                <!-- ko foreach: filter(tracks) -->
+                <div class="box">
+                  <div class="jacket" data-bind="attr: {title: tips}, style: {background: clearmark, 'background-image': jacket, 'background-position':sprite_position, opacity:((is_99()&amp;&amp;$root.showMark())?0.2:1)}" witdh="56px" height="56px"></div>
+                  <div class="grade" data-bind="visible: $root.showGrade">
+                    <p class="text-center" style="margin: 0px" data-bind="text: grade"></p>
+                  </div>
+                  <div class="score" data-bind="visible: $root.showScore">
+                    <p class="text-center" style="margin: 0px" data-bind="text: score"></p>
+                  </div>
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+          <!-- /ko -->
+        </div>
+
+        <div class="tab-pane fade" id="tab4">
+          <!-- ko foreach: filter15_Clear.ranks -->
+          <div style="margin: 10px 0px;">
+            <div style="float: left;">
+              <h3 data-bind="text: title"></h3>
+            </div>
+            <div style="margin-left: 50px;">
+              <div class="box-wrapper">
+                <!-- ko foreach: filter(tracks) -->
+                <div class="box">
+                  <div class="jacket" data-bind="attr: {title: tips}, style: {background: clearmark, 'background-image': jacket, 'background-position':sprite_position, opacity:((is_clear()&amp;&amp;$root.showMark())?0.2:1)}" witdh="56px" height="56px"></div>
+                  <div class="grade" data-bind="visible: $root.showGrade">
+                    <p class="text-center" style="margin: 0px" data-bind="text: grade"></p>
+                  </div>
+                  <div class="score" data-bind="visible: $root.showScore">
+                    <p class="text-center" style="margin: 0px" data-bind="text: score"></p>
+                  </div>
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+          <!-- /ko -->
+        </div>
+
+        <div class="tab-pane fade" id="tab5">
+          <!-- ko foreach: filter15_AAA.ranks -->
+          <div style="margin: 10px 0px;">
+            <div style="float: left;">
+              <h3 data-bind="text: title"></h3>
+            </div>
+            <div style="margin-left: 50px;">
+              <div class="box-wrapper">
+                <!-- ko foreach: filter(tracks) -->
+                <div class="box">
+                  <div class="jacket" data-bind="attr: {title: tips}, style: {background: clearmark, 'background-image': jacket, 'background-position':sprite_position, opacity:((is_aaa()&amp;&amp;$root.showMark())?0.2:1)}" witdh="56px" height="56px"></div>
+                  <div class="grade" data-bind="visible: $root.showGrade">
+                    <p class="text-center" style="margin: 0px" data-bind="text: grade"></p>
+                  </div>
+                  <div class="score" data-bind="visible: $root.showScore">
+                    <p class="text-center" style="margin: 0px" data-bind="text: score"></p>
+                  </div>
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+          <!-- /ko -->
+        </div>
+
+        <div class="tab-pane fade" id="tab6">
+          <!-- ko foreach: filter15_99.ranks -->
+          <div style="margin: 10px 0px;">
+            <div style="float: left;">
+              <h3 data-bind="text: title"></h3>
+            </div>
+            <div style="margin-left: 50px;">
+              <div class="box-wrapper">
+                <!-- ko foreach: filter(tracks) -->
+                <div class="box">
+                  <div class="jacket" data-bind="attr: {title: tips}, style: {background: clearmark, 'background-image': jacket, 'background-position':sprite_position, opacity:((is_99()&amp;&amp;$root.showMark())?0.2:1)}" witdh="56px" height="56px"></div>
+                  <div class="grade" data-bind="visible: $root.showGrade">
+                    <p class="text-center" style="margin: 0px" data-bind="text: grade"></p>
+                  </div>
+                  <div class="score" data-bind="visible: $root.showScore">
+                    <p class="text-center" style="margin: 0px" data-bind="text: score"></p>
+                  </div>
+                </div>
+                <!-- /ko -->
+              </div>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="text-center">
+    <small>Developed by <a href="https://twitter.com/nk_n00b">@nk_n00b</a></small>
+  </footer>
+
+</body>
+</html>
