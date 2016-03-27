@@ -9,10 +9,11 @@ body {
 .jacket {
     padding: 4px;
     margin: -1px;
-    background: #000;
     width: 56px;
     height: 56px;
     overflow: hidden;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .box-wrapper {
@@ -30,6 +31,7 @@ body {
 }
 
 .grade {
+    margin-top: 1px;
     border-top: solid 1px #CCC;
 }
 

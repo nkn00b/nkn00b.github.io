@@ -56,7 +56,7 @@ function Track(json, difficulty)
 		{
 			return "Gold"; // Perfect
 		}
-		return "rgba(0,0,0,0)";
+		return "#CCC";
 	});
 	self.setClearmark = function(medal)
 	{
@@ -87,7 +87,7 @@ function Track(json, difficulty)
 		var index = parseInt(self.id);
 		var left = index % 16
 		var top = Math.floor(index / 16)
-		return "-" + (left * 56) + "px -" + (top * 56) + "px";
+		return "-" + ((left * 56)+1) + "px -" + ((top * 56)+1) + "px";
 	});
 
 	self.jacket = ko.computed(function()
