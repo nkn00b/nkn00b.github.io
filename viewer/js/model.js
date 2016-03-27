@@ -230,6 +230,13 @@ function ScoreViewerModel(tracks)
 			};
 			ko.utils.arrayPushAll(self.tracks, tmp);
 		});
+
+
+		var params = self.getQueryString();
+		if ('id' in params)
+		{
+			self.loadUserdata(params['id']);
+		}
 	}
 
 	self.loadUserdata = function(username)
@@ -292,5 +299,19 @@ function ScoreViewerModel(tracks)
 				}
 			};
 		});
+	}
+
+	self.getQueryString = function()
+	{
+		var result = {};
+		if (1 < window.location.search.length)
+		{
+			var parameters = window.location.search.substring(1).split('&');
+			for (var i = 0; i < parameters.length; i++) {
+				var kv = parameters[i].split('=');
+				result[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1]);
+			}
+		}
+		return result;
 	}
 }
