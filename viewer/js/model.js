@@ -186,6 +186,21 @@ function ScoreViewerModel(tracks)
 	var self = this;
 	self.tracks = tracks;
 	self.tracksDict = {};
+	self.settings = {"showGrade":true, "showScore":true, "showMark":false};
+
+	self.loadSettings = function()
+	{
+		var settings = JSON.parse(localStorage.getItem("settings"));
+		if(settings)
+		{
+			self.settings = settings;
+		}
+	}
+
+	self.saveSettings = function()
+	{
+		localStorage.setItem("settings", JSON.stringify(self.settings));
+	}
 
 	self.loadTracks = function()
 	{

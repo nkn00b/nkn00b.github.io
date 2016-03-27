@@ -7,9 +7,27 @@ function ScoreViewerViewModel()
 	self.model = new ScoreViewerModel(self.tracks);
 	self.username = ko.observable();
 
-	self.showGrade = ko.observable(true);
-	self.showScore = ko.observable(true);
-	self.showMark = ko.observable(false);
+	self.model.loadSettings();
+
+	self.showGrade = ko.observable(self.model.settings["showGrade"]);
+	self.showScore = ko.observable(self.model.settings["showScore"]);
+	self.showMark = ko.observable(self.model.settings["showMark"]);
+
+	self.showGrade.subscribe(function(newValue)
+	{
+		self.model.settings["showGrade"] = self.showGrade();
+		self.model.saveSettings();
+	});
+	self.showScore.subscribe(function(newValue)
+	{
+		self.model.settings["showScore"] = self.showScore();
+		self.model.saveSettings();
+	});
+	self.showMark.subscribe(function(newValue)
+	{
+		self.model.settings["showMark"] = self.showMark();
+		self.model.saveSettings();
+	});
 
 	self.loadTracks = function()
 	{
