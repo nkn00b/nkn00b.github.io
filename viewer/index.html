@@ -9,6 +9,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="//platform.twitter.com/widgets.js"></script>
 
   <script src="../js/knockout-3.2.0.js"></script>
   <script src="js/model.js"></script>
@@ -232,6 +233,12 @@
     </div>
   </div>
 
+  <div class="pull-right">
+    <a href="https://twitter.com/share" class="twitter-share-button-template" data-bind="attr: {'data-url': model.tweet_url, 'data-text': model.tweet_title}" data-size="large" style="display:none;">Tweet</a>
+    <!-- ko text: model.showTweetButton() -->
+    <!-- /ko -->
+    <div id="tweet-area"></div>
+  </div>
   <footer class="text-center">
     <small>Developed by <a href="https://twitter.com/nk_n00b">@nk_n00b</a></small>
   </footer>

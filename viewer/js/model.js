@@ -188,6 +188,10 @@ function ScoreViewerModel(tracks)
 	self.tracksDict = {};
 	self.settings = {"showGrade":true, "showScore":true, "showMark":false};
 
+	self.base_url = "http://nkn00b.github.io/viewer/";
+	self.tweet_url = ko.observable(self.base_url);
+	self.tweet_title = ko.observable("SDVX Score tool viewer");
+
 	self.loadSettings = function()
 	{
 		var settings = JSON.parse(localStorage.getItem("settings"));
@@ -248,6 +252,9 @@ function ScoreViewerModel(tracks)
 		}
 		else
 		{
+			self.tweet_title(username + "'s score - SDVX Score tool viewer");
+			self.tweet_url(self.base_url + "?id=" + username);
+			self.showTweetButton();
 			jsonUrl = "http://bluekingdragon.dip.jp/sdvx/showUserData.php?id=" + username +"&output=json&callback=?";
 		}
 		$.getJSON(jsonUrl, function(json)
@@ -313,5 +320,16 @@ function ScoreViewerModel(tracks)
 			}
 		}
 		return result;
+	}
+
+	self.showTweetButton = function()
+	{
+		$('#tweet-area').empty()
+		var clone = $('.twitter-share-button-template').clone();
+		clone.removeAttr('style');
+		clone.attr('class', 'twitter-share-button');
+		$('#tweet-area').append(clone);
+		twttr.widgets.load();
+		console.log($('.twitter-share-button-template').attr('data-url'));
 	}
 }
